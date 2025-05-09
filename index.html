@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Roblox UI Portfolio</title>
+    <title>My Roblox UI Portfolio - Polished</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #0A0E14;
-            --bg-content: #111827;
+            --bg-main: #1a1a1a;
+            --bg-content: #242424;
             --text-primary: #E1E8F0;
-            --text-secondary: #9CA3AF;
+            --text-secondary: #A0AEC0;
             --accent-indigo: #6366F1;
             --accent-purple: #A78BFA;
             --accent-pink: #F472B6;
             --accent-blue: #3B82F6;
-            --border-color: #21262D;
-            --shadow-color-light: rgba(167, 139, 250, 0.1);
-            --shadow-color-dark: rgba(0, 0, 0, 0.2);
+            --border-color: #383838;
+            --shadow-color-light: rgba(167, 139, 250, 0.08);
+            --shadow-color-dark: rgba(0, 0, 0, 0.25);
         }
 
         html { scroll-behavior: smooth; }
@@ -56,20 +56,21 @@
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.7); } 70% { opacity: 1; transform: scale(1.03); } 100% { opacity: 1; transform: scale(1); } }
         .animate-fadeIn { animation: fadeIn 1s ease-out forwards; }
         .js-scroll-animated { opacity: 0; }
+        .js-hero-animated { opacity: 0; }
 
         ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #010409; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 5px; border: 2px solid #010409; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 5px; border: 2px solid #080808; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-indigo); }
 
-        .glass-card { background: rgba(22, 27, 34, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out, max-height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out; border-radius: 12px; }
+        .glass-card { background: rgba(36, 36, 36, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease-out, max-height 0.5s ease-out, margin 0.5s ease-out, padding 0.5s ease-out; border-radius: 12px; }
         .glass-card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px -5px var(--shadow-color-dark), 0 8px 15px -6px var(--shadow-color-light); }
 
         .typewriter-text .cursor { display: inline-block; background-color: var(--accent-purple); margin-left: 0.1em; width: 3px; animation: blink 1s infinite; height: 1em; vertical-align: middle; }
         .typewriter-text .cursor.hidden { display: none; }
         @keyframes blink { 0%, 100% { background-color: var(--accent-purple); } 50% { background-color: transparent; } }
 
-        header { background-color: rgba(13, 17, 23, 0.8) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid var(--border-color); }
+        header { background-color: rgba(26, 26, 26, 0.8) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-bottom: 1px solid var(--border-color); }
         header nav a { position: relative; padding-bottom: 6px; font-weight: 500; color: var(--text-secondary); }
         header nav a:hover { color: var(--text-primary); }
         header nav a::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; width: 0; height: 2px; background-color: var(--accent-indigo); transition: width 0.3s ease-in-out; }
@@ -78,15 +79,15 @@
 
         .button-base { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-align: center; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease-out, background-color 0.2s ease-out, color 0.2s ease-out; cursor: pointer; border: 1px solid transparent; }
         .button-base:hover { transform: translateY(-3px) scale(1.03); }
-        .button-base:active { transform: translateY(-1px) scale(0.98); box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
-        .button-primary { background-color: var(--accent-indigo); color: white; box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.3); }
-        .button-primary:hover { background-color: #4F46E5; box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.4); }
-        .button-secondary { background-color: #5865F2; color: white; box-shadow: 0 4px 14px 0 rgba(88, 101, 242, 0.3); }
-        .button-secondary:hover { background-color: #4752C4; box-shadow: 0 6px 20px 0 rgba(88, 101, 242, 0.4); }
+        .button-base:active { transform: translateY(-1px) scale(0.97); box-shadow: inset 0 3px 5px rgba(0,0,0,0.2); }
+        .button-primary { background-color: var(--accent-indigo); color: white; box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.25); }
+        .button-primary:hover { background-color: #4F46E5; box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.35); }
+        .button-secondary { background-color: #5865F2; color: white; box-shadow: 0 4px 14px 0 rgba(88, 101, 242, 0.25); }
+        .button-secondary:hover { background-color: #4752C4; box-shadow: 0 6px 20px 0 rgba(88, 101, 242, 0.35); }
         .button-outline { background-color: transparent; color: var(--accent-purple); border: 1px solid var(--accent-purple); }
-        .button-outline:hover { background-color: rgba(167, 139, 250, 0.1); color: var(--accent-purple); box-shadow: 0 0 15px 0 rgba(167, 139, 250, 0.15); }
+        .button-outline:hover { background-color: rgba(167, 139, 250, 0.1); color: var(--accent-purple); box-shadow: 0 0 15px 0 rgba(167, 139, 250, 0.1); }
 
-        #project-modal { position: fixed; inset: 0; background-color: rgba(13, 17, 23, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; padding: 1rem; }
+        #project-modal { position: fixed; inset: 0; background-color: rgba(26, 26, 26, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-out, visibility 0s linear 0.3s; padding: 1rem; }
         #project-modal.active { opacity: 1; visibility: visible; transition: opacity 0.3s ease-out, visibility 0s linear 0s; }
         .modal-content { background-color: var(--bg-content); padding: 2.5rem; border-radius: 16px; box-shadow: 0 25px 50px -12px var(--shadow-color-dark); width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); border: 1px solid var(--border-color); }
         #project-modal.active .modal-content { transform: scale(1); }
@@ -154,13 +155,13 @@
         #about .section-separator .shape-fill { fill: var(--bg-content); }
         #testimonials .section-separator .shape-fill { fill: var(--bg-main); }
 
-        .interactive-bg-element { position: absolute; border-radius: 50%; background: linear-gradient(145deg, var(--accent-indigo), var(--accent-purple)); opacity: 0.04; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none; z-index: 0; filter: blur(10px); }
-        #skills .interactive-bg-element.el-1 { width: 250px; height: 250px; top: 10%; left: 5%; }
-        #skills .interactive-bg-element.el-2 { width: 180px; height: 180px; bottom: 15%; right: 10%; }
-        #about .interactive-bg-element.el-1 { width: 300px; height: 300px; top: 20%; right: 5%; }
-        #about .interactive-bg-element.el-2 { width: 220px; height: 220px; bottom: 10%; left: 10%; }
-        #contributions .interactive-bg-element.el-1 { width: 200px; height: 200px; top: 15%; left: 60%; }
-        #contributions .interactive-bg-element.el-2 { width: 150px; height: 150px; bottom: 20%; left: 5%; }
+        .interactive-bg-element { position: absolute; border-radius: 50%; background: linear-gradient(145deg, var(--accent-indigo), var(--accent-purple)); opacity: 0.03; transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); pointer-events: none; z-index: 0; filter: blur(15px); }
+        #skills .interactive-bg-element.el-1 { width: 280px; height: 280px; top: 5%; left: 2%; }
+        #skills .interactive-bg-element.el-2 { width: 200px; height: 200px; bottom: 10%; right: 5%; }
+        #about .interactive-bg-element.el-1 { width: 320px; height: 320px; top: 15%; right: 2%; }
+        #about .interactive-bg-element.el-2 { width: 240px; height: 240px; bottom: 5%; left: 5%; }
+        #contributions .interactive-bg-element.el-1 { width: 220px; height: 220px; top: 10%; left: 55%; }
+        #contributions .interactive-bg-element.el-2 { width: 170px; height: 170px; bottom: 15%; left: 2%; }
 
 
         footer { background-color: var(--bg-content); padding-top: 4rem; padding-bottom: 4rem; border-top: 1px solid var(--border-color); }
@@ -188,7 +189,7 @@
         <header class="fixed top-0 left-0 right-0 z-[100] animate-fadeIn" style="animation-delay: 0.1s;">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
                 <a href="#home" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 hover:opacity-80 transition-opacity">
-                    Turtles
+                    TTurtlesss
                 </a>
                 <div class="flex items-center">
                     <nav id="main-nav" class="space-x-3 sm:space-x-5 md:space-x-6">
@@ -209,12 +210,12 @@
             <canvas id="hero-canvas"></canvas>
             <div class="hero-content-wrapper text-center px-6">
                 <h1 id="hero-headline" class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-500 typewriter-text leading-tight"></h1>
-                <p id="hero-subheadline" class="mt-6 text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto js-scroll-animated" style="animation-delay: 0.5s;">
+                <p id="hero-subheadline" class="mt-6 text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto js-hero-animated">
                     Passionate UI designer specializing in intuitive and visually stunning interfaces for the Roblox platform.
                 </p>
                 <a href="#featured-project"
-                   class="button-base button-primary mt-10 js-scroll-animated"
-                   style="animation-delay: 0.7s;">
+                   class="button-base button-primary mt-10 js-hero-animated"
+                   style="animation-delay: 0.2s;">
                     View Featured Work
                 </a>
             </div>
@@ -483,7 +484,7 @@
                     </a>
                 </div>
                  <p class="js-scroll-animated mt-8 text-xs text-[var(--text-secondary)] opacity-75" data-animation="fadeInUp" style="animation-delay: 0.4s;">
-                </p>
+                 </p>
             </div>
         </section>
 
@@ -538,6 +539,7 @@
     const viewDetailsButtons = document.querySelectorAll('.view-details-button');
     const backToTopBtn = document.getElementById('backToTopBtn');
     const scrollAnimatedElements = document.querySelectorAll('.js-scroll-animated');
+    const heroAnimatedElements = document.querySelectorAll('.js-hero-animated');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('#main-nav a.nav-link');
     const mainContentElement = document.getElementById('main-content');
@@ -547,11 +549,11 @@
 
     function initThreeJS() { if (!heroCanvas) return; scene = new THREE.Scene(); camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true }); renderer.setSize(window.innerWidth, window.innerHeight); renderer.setClearColor(0x000000, 0); const particleCount = 6000; const positions = new Float32Array(particleCount * 3); const colors = new Float32Array(particleCount * 3); const color = new THREE.Color(); for (let i = 0; i < particleCount * 3; i += 3) { positions[i] = (Math.random() - 0.5) * 1200; positions[i + 1] = (Math.random() - 0.5) * 1200; positions[i + 2] = (Math.random() - 0.5) * 1200; const randomColor = Math.random(); if (randomColor < 0.33) color.setHex(0x6366F1); else if (randomColor < 0.66) color.setHex(0xA78BFA); else color.setHex(0xF472B6); colors[i] = color.r; colors[i + 1] = color.g; colors[i + 2] = color.b; } const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3)); geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3)); const material = new THREE.PointsMaterial({ size: 1.2, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, opacity: 0.6 }); particles = new THREE.Points(geometry, material); scene.add(particles); camera.position.z = 70; animateThreeJS(); }
     document.addEventListener('mousemove', (event) => { mouseX = (event.clientX / window.innerWidth) * 2 - 1; mouseY = -(event.clientY / window.innerHeight) * 2 + 1; });
-    function animateThreeJS() { if (!renderer) return; requestAnimationFrame(animateThreeJS); particles.rotation.x += 0.00008 + (mouseY * 0.00005); particles.rotation.y += 0.00012 + (mouseX * 0.00005); renderer.render(scene, camera); }
+    function animateThreeJS() { if (!renderer) return; requestAnimationFrame(animateThreeJS); particles.rotation.x += 0.00008 + (mouseY * 0.00008); particles.rotation.y += 0.00012 + (mouseX * 0.00008); renderer.render(scene, camera); }
     function onWindowResizeThreeJS() { if (!camera || !renderer) return; camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }
     window.addEventListener('resize', onWindowResizeThreeJS, false);
 
-    function type() { if (charIndex < textToType.length) { heroHeadline.innerHTML = textToType.substring(0, charIndex + 1) + '<span class="cursor"></span>'; charIndex++; typingTimeout = setTimeout(type, 70); } else { const cursorSpan = heroHeadline.querySelector('.cursor'); if(cursorSpan) cursorSpan.classList.add('hidden'); document.getElementById('hero-subheadline').style.animationName = 'fadeInUp'; document.querySelector('#home .button-primary').style.animationName = 'fadeInUp'; } }
+    function type() { if (charIndex < textToType.length) { heroHeadline.innerHTML = textToType.substring(0, charIndex + 1) + '<span class="cursor"></span>'; charIndex++; typingTimeout = setTimeout(type, 70); } else { const cursorSpan = heroHeadline.querySelector('.cursor'); if(cursorSpan) cursorSpan.classList.add('hidden'); heroAnimatedElements.forEach((el, index) => { el.style.animation = `fadeInUp 0.8s ease-out ${index * 0.2 + 0.2}s forwards`; }); } }
 
     document.addEventListener('mousemove', (e) => { if (cursorDot) { cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px'; } });
 
@@ -630,22 +632,38 @@
     const interactiveSections = document.querySelectorAll('#skills, #about, #contributions');
     interactiveSections.forEach(section => {
         const elements = section.querySelectorAll('.interactive-bg-element');
+        let parallaxY = 0;
         section.addEventListener('mousemove', (e) => {
             const rect = section.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             elements.forEach((el, index) => {
-                const moveX = (x / rect.width - 0.5) * (index % 2 === 0 ? -25 : 25);
-                const moveY = (y / rect.height - 0.5) * (index % 2 === 0 ? -25 : 25);
-                el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                const moveX = (x / rect.width - 0.5) * (index % 2 === 0 ? -30 : 30);
+                const moveY = (y / rect.height - 0.5) * (index % 2 === 0 ? -30 : 30);
+                el.style.transform = `translate(calc(var(--parallax-x, 0px) + ${moveX}px), calc(var(--parallax-y, 0px) + ${moveY}px))`;
             });
         });
         section.addEventListener('mouseleave', () => {
             elements.forEach(el => {
-                el.style.transform = 'translate(0px, 0px)';
+                 el.style.transform = `translate(var(--parallax-x, 0px), var(--parallax-y, 0px))`;
             });
         });
     });
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset;
+        document.querySelectorAll('.interactive-bg-element').forEach((el, index) => {
+            const speed = (index % 2 === 0) ? 0.05 : 0.08; // Different speeds for variation
+            const parallaxY = -(scrollY * speed * 0.5); // Reduced intensity
+            el.style.setProperty('--parallax-y', `${parallaxY}px`);
+             // Keep existing mouse-based transform if you want, or simplify
+             // For now, this will override mousemove if scroll is dominant.
+             // To combine, you'd need to adjust the transform in mousemove to add this.
+             // For simplicity, let's make scroll primary for these elements' Y.
+             // The mousemove above already adds to --parallax-y, so this should work.
+        });
+    });
+
 
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
@@ -655,7 +673,11 @@
             if (preloader) { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 500); }
             if (mainContentElement) { mainContentElement.classList.remove('fading-out', 'fading-in'); mainContentElement.style.opacity = '1'; if (heroHeadline) setTimeout(type, 300); }
             const scrollObserver = new IntersectionObserver(scrollObserverCallback, scrollObserverOptions);
-            scrollAnimatedElements.forEach(el => { if (el.id === 'hero-subheadline' && heroHeadline) { /* Skip */ } else if (el.classList.contains('button-primary') && el.closest('#home') && heroHeadline) { /* Skip */ } else { scrollObserver.observe(el); } });
+            scrollAnimatedElements.forEach(el => {
+                 if (!(el.classList.contains('js-hero-animated') && heroHeadline)) {
+                     scrollObserver.observe(el);
+                 }
+            });
             const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
             sections.forEach(section => sectionObserver.observe(section));
         }, 1500);
@@ -665,7 +687,6 @@
     document.querySelectorAll('#main-nav a.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            // playSound('click'); // Removed
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement && mainContentElement) {
